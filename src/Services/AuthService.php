@@ -36,8 +36,9 @@ class AuthService
         $signupDto->email = $email;
         $signupDto->familyName = $lastName;
         $signupDto->givenName = $firstName;
+
         $signupDto->password = password_hash(
-            $email.uniqid('password', true),
+            uniqid('password', true),
             PASSWORD_BCRYPT
         );
         $signupDto->repeatPassword = $signupDto->password;
