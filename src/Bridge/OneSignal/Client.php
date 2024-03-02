@@ -28,6 +28,10 @@ class Client
 
     public function sendNotification(Notification $notification): void
     {
-        $this->client->notifications()->add($notification->toArray($this->translator));
+        $result = $this->client->notifications()->add($notification->toArray($this->translator));
+
+        if (isset($result['errors'][0])) {
+            throw new \RuntimeException($result['errors'][0]);
+        }
     }
 }
