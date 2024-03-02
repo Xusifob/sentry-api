@@ -1,0 +1,9 @@
+auth:
+    resource: routes/auth.yaml
+
+media:
+    resource: routes/sentry.yaml
+
+api_platform:
+    resource: routes/api_platform.yaml
+

@@ -1,0 +1,51 @@
+version: "3.4"
+
+services:
+  php:
+    build:
+      context: ./
+    ports:
+      - "80:80"
+      - "555:443"
+    depends_on:
+      - database
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html/
+      - ./docker/php/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/php/ports.conf:/etc/apache2/ports.conf
+      
+    environment:
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+      TRUSTED_HOSTS: ^${SERVER_NAME:-example\.com|localhost}|caddy$$
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+
+
+  database:
+    platform: linux/x86_64
+    image: mysql:5
+    restart: always
+    ports:
+      - "3366:3306"
+    volumes:
+      - sentry_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: 'root'
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5
+    ports:
+      - "9944:80"
+    links:
+      - database
+    environment:
+      PMA_HOST: database
+  
+volumes:
+###> doctrine/doctrine-bundle ###
+  sentry_data:
+###< doctrine/doctrine-bundle ###
+

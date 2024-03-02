@@ -1,0 +1,369 @@
+{
+  "action": "triggered",
+  "installation": {
+    "uuid": "dcd196af-5121-4a2e-b5b4-4476e1a4bcf6"
+  },
+  "data": {
+    "event": {
+      "event_id": "8af09ab942964891b8aa9122e469bdc5",
+      "project": 4506700280168448,
+      "release": null,
+      "dist": null,
+      "platform": "other",
+      "message": "This is an example Symfony exception",
+      "datetime": "2024-03-02T15:35:40.068000Z",
+      "tags": [
+        [
+          "browser",
+          "Chrome 28.0.1500"
+        ],
+        [
+          "browser.name",
+          "Chrome"
+        ],
+        [
+          "client_os",
+          "Windows 8"
+        ],
+        [
+          "client_os.name",
+          "Windows"
+        ],
+        [
+          "level",
+          "error"
+        ],
+        [
+          "sample_event",
+          "yes"
+        ],
+        [
+          "user",
+          "id:1"
+        ],
+        [
+          "url",
+          "http://example.com/foo"
+        ]
+      ],
+      "_meta": {
+        "platform": {
+          "": {
+            "val": "php-symfony"
+          }
+        }
+      },
+      "_metrics": {
+        "bytes.stored.event": 5228
+      },
+      "_ref": 4506700280168448,
+      "_ref_version": 2,
+      "contexts": {
+        "browser": {
+          "name": "Chrome",
+          "version": "28.0.1500",
+          "type": "browser"
+        },
+        "client_os": {
+          "name": "Windows",
+          "version": "8",
+          "type": "os"
+        }
+      },
+      "culprit": "raven in raven_cli_test",
+      "exception": {
+        "values": [
+          {
+            "type": "Exception",
+            "value": "This is a test exception sent from the Raven CLI.",
+            "module": "/Users/example/Development/raven-php/bin/raven:16",
+            "stacktrace": {
+              "frames": [
+                {
+                  "function": "null",
+                  "module": "raven",
+                  "filename": "/Users/example/Development/raven-php/bin/raven",
+                  "abs_path": "/Users/example/Development/raven-php/bin/raven",
+                  "lineno": 88,
+                  "pre_context": [
+                    "        default:",
+                    "            exit('Usage: raven test <dsn>');",
+                    "    }",
+                    "}",
+                    ""
+                  ],
+                  "context_line": "main();",
+                  "post_context": [
+                    ""
+                  ],
+                  "colno": null,
+                  "data": {
+                    "orig_in_app": -1
+                  },
+                  "errors": null,
+                  "raw_function": null,
+                  "image_addr": null,
+                  "in_app": false,
+                  "instruction_addr": null,
+                  "addr_mode": null,
+                  "package": null,
+                  "platform": null,
+                  "source_link": null,
+                  "symbol": null,
+                  "symbol_addr": null,
+                  "trust": null,
+                  "vars": null,
+                  "snapshot": null,
+                  "lock": null
+                },
+                {
+                  "function": "main",
+                  "module": "raven",
+                  "filename": "/Users/example/Development/raven-php/bin/raven",
+                  "abs_path": "/Users/example/Development/raven-php/bin/raven",
+                  "lineno": 81,
+                  "pre_context": [
+                    "",
+                    "    $cmd = $argv[1];",
+                    "",
+                    "    switch ($cmd) {",
+                    "        case 'test':"
+                  ],
+                  "context_line": "            cmd_test(@$argv[2]);",
+                  "post_context": [
+                    "            break;",
+                    "        default:",
+                    "            exit('Usage: raven test <dsn>');",
+                    "    }",
+                    "}"
+                  ],
+                  "colno": null,
+                  "data": {
+                    "orig_in_app": -1
+                  },
+                  "errors": null,
+                  "raw_function": null,
+                  "image_addr": null,
+                  "in_app": false,
+                  "instruction_addr": null,
+                  "addr_mode": null,
+                  "package": null,
+                  "platform": null,
+                  "source_link": null,
+                  "symbol": null,
+                  "symbol_addr": null,
+                  "trust": null,
+                  "vars": null,
+                  "snapshot": null,
+                  "lock": null
+                },
+                {
+                  "function": "cmd_test",
+                  "module": "raven",
+                  "filename": "/Users/example/Development/raven-php/bin/raven",
+                  "abs_path": "/Users/example/Development/raven-php/bin/raven",
+                  "lineno": 59,
+                  "pre_context": [
+                    "    }",
+                    "    echo \"\\n\";",
+                    "",
+                    "    echo \"Sending a test event:\\n\";",
+                    ""
+                  ],
+                  "context_line": "    $ex = raven_cli_test(\"command name\", array(\"foo\" => \"bar\"));",
+                  "post_context": [
+                    "    $event_id = $client->captureException($ex);",
+                    "",
+                    "    echo \"-> event ID: $event_id\\n\";",
+                    "",
+                    "    $last_error = $client->getLastError();"
+                  ],
+                  "vars": {
+                    "dsn": "https://e9ebbd88548a441288393c457ec90441:399aaee02d454e2ca91351f29bdc3a07@sentry.io/3235"
+                  },
+                  "colno": null,
+                  "data": {
+                    "orig_in_app": -1
+                  },
+                  "errors": null,
+                  "raw_function": null,
+                  "image_addr": null,
+                  "in_app": false,
+                  "instruction_addr": null,
+                  "addr_mode": null,
+                  "package": null,
+                  "platform": null,
+                  "source_link": null,
+                  "symbol": null,
+                  "symbol_addr": null,
+                  "trust": null,
+                  "snapshot": null,
+                  "lock": null
+                },
+                {
+                  "function": "raven_cli_test",
+                  "module": "raven",
+                  "filename": "/Users/example/Development/raven-php/bin/raven",
+                  "abs_path": "/Users/example/Development/raven-php/bin/raven",
+                  "lineno": 16,
+                  "pre_context": [
+                    "",
+                    "function raven_cli_test($command, $args)",
+                    "{",
+                    "    // Do something silly",
+                    "    try {"
+                  ],
+                  "context_line": "        throw new Exception('This is a test exception sent from the Raven CLI.');",
+                  "post_context": [
+                    "    } catch (Exception $ex) {",
+                    "        return $ex;",
+                    "    }",
+                    "}",
+                    ""
+                  ],
+                  "vars": {
+                    "args": {
+                      "foo": "bar"
+                    },
+                    "command": "command name"
+                  },
+                  "colno": null,
+                  "data": {
+                    "orig_in_app": -1
+                  },
+                  "errors": null,
+                  "raw_function": null,
+                  "image_addr": null,
+                  "in_app": false,
+                  "instruction_addr": null,
+                  "addr_mode": null,
+                  "package": null,
+                  "platform": null,
+                  "source_link": null,
+                  "symbol": null,
+                  "symbol_addr": null,
+                  "trust": null,
+                  "snapshot": null,
+                  "lock": null
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "extra": {
+        "emptyList": [],
+        "emptyMap": {},
+        "length": 10837790,
+        "results": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "session": {
+          "foo": "bar"
+        },
+        "unauthorized": false,
+        "url": "http://example.org/foo/bar/"
+      },
+      "fingerprint": [
+        "{{ default }}"
+      ],
+      "hashes": [
+        "5a33f4afaec0a9fafcb1b6ddb144720b"
+      ],
+      "level": "error",
+      "location": "/Users/example/Development/raven-php/bin/raven",
+      "logentry": {
+        "formatted": "This is an example Symfony exception",
+        "message": null,
+        "params": null
+      },
+      "logger": "",
+      "metadata": {
+        "value": "This is a test exception sent from the Raven CLI.",
+        "type": "Exception",
+        "filename": "/Users/example/Development/raven-php/bin/raven",
+        "function": "raven_cli_test",
+        "display_title_with_tree_label": false,
+        "in_app_frame_mix": "system-only"
+      },
+      "modules": {
+        "my.package": "1.0.0"
+      },
+      "nodestore_insert": 1709393800.947003,
+      "received": 1709393800.068932,
+      "request": {
+        "url": "http://example.com/foo",
+        "method": "GET",
+        "data": {
+          "hello": "world"
+        },
+        "query_string": [
+          [
+            "foo",
+            "bar"
+          ]
+        ],
+        "cookies": [
+          [
+            "foo",
+            "bar"
+          ],
+          [
+            "biz",
+            "baz"
+          ]
+        ],
+        "headers": [
+          [
+            "Content-Type",
+            "application/json"
+          ],
+          [
+            "Referer",
+            "http://example.com"
+          ],
+          [
+            "User-Agent",
+            "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36"
+          ]
+        ],
+        "env": {
+          "ENV": "prod"
+        },
+        "inferred_content_type": "application/json",
+        "api_target": null,
+        "fragment": null
+      },
+      "timestamp": 1709393740.068,
+      "title": "Exception: This is a test exception sent from the Raven CLI.",
+      "type": "error",
+      "user": {
+        "id": "1",
+        "email": "sentry@example.com",
+        "ip_address": "127.0.0.1",
+        "username": "sentry",
+        "name": "Sentry",
+        "geo": {
+          "country_code": "AU",
+          "city": "Melbourne",
+          "region": "VIC"
+        }
+      },
+      "version": "5",
+      "url": "https://sentry.io/api/0/projects/mapclinic/php-symfony/events/8af09ab942964891b8aa9122e469bdc5/",
+      "web_url": "https://sentry.io/organizations/mapclinic/issues/5030287736/events/8af09ab942964891b8aa9122e469bdc5/",
+      "issue_url": "https://sentry.io/api/0/issues/5030287736/",
+      "issue_id": "5030287736"
+    },
+    "triggered_rule": ""
+  },
+  "actor": {
+    "type": "application",
+    "id": "sentry",
+    "name": "Sentry"
+  }
+}

@@ -1,0 +1,23 @@
+jwt_authentication_token:
+    path: /api/v1/login
+    methods: ['POST']
+
+api_refresh_token:
+    path: /api/v1/token/refresh
+
+api_logout:
+    path: /logout
+    
+    
+oauth2_google_redirect:
+    path: /oauth2/google/redirect
+    methods: ['GET']
+    defaults:
+        _controller: App\Controller\Oauth2\GoogleAuthController::redirectAction
+
+
+oauth2_google_callback:
+    path: /api/v1/oauth2/google/callback
+    methods: ['GET']
+    defaults:
+        _controller: App\Controller\Oauth2\GoogleAuthController::callbackAction
