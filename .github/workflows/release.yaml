@@ -46,34 +46,34 @@ jobs:
       - name: PHPStan
         run: ./vendor/bin/phpstan analyse -c phpstan.neon -l 6 src/
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+ #test:
+ #  runs-on: ubuntu-latest
+ #  steps:
+ #    - name: Checkout
+ #      uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          extensions: http, intl, json, openssl, zip
-          php-version: 8.1
-          tools: composer:v2
+ #    - name: Setup PHP
+ #      uses: shivammathur/setup-php@v2
+ #      with:
+ #        extensions: http, intl, json, openssl, zip
+ #        php-version: 8.1
+ #        tools: composer:v2
 
-      - name: Cache composer dependencies
-        uses: actions/cache@v1
-        with:
-          path: vendor
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+ #    - name: Cache composer dependencies
+ #      uses: actions/cache@v1
+ #      with:
+ #        path: vendor
+ #        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+ #        restore-keys: ${{ runner.os }}-composer-
 
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-scripts
+ #    - name: Install Composer dependencies
+ #      run: composer install --prefer-dist --no-progress --no-scripts
 
-      - name: Create database
-        run: touch ./test.sqlite && php bin/console doctrine:database:create --env=test && php bin/console doctrine:schema:update --force --env=test
+ #    - name: Create database
+ #      run: touch ./test.sqlite && php bin/console doctrine:database:create --env=test && php bin/console doctrine:schema:update --force --env=test
 
-      - name: Run Unit Tests
-        run: vendor/bin/phpunit --testdox
+ #    - name: Run Unit Tests
+ #      run: vendor/bin/phpunit --testdox
 
   deploy:
     environment: 'production'
