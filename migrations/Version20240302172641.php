@@ -14,7 +14,7 @@ final class Version20240302172641 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Add one signal device';
     }
 
     public function up(Schema $schema): void

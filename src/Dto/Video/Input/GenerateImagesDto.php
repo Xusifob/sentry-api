@@ -10,7 +10,7 @@ class GenerateClipDto
     #[Assert\All(
         constraints: [
             new Assert\NotBlank(),
-            new Assert\Length(min: 1, max: 4096)
+            new Assert\Length(min: 1, max: 4096),
         ]
     )]
     #[Groups(['write'])]

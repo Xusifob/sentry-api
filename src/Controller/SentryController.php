@@ -22,10 +22,8 @@ class SentryController extends AbstractController
     ) {
     }
 
-
-    public function webhookAction(Request $request): Response
+    public function webhookAction(Request $request, User $user): Response
     {
-
         $data = $request->toArray();
         $event = $data['data']['event'];
 
@@ -44,12 +42,6 @@ class SentryController extends AbstractController
 
         $error->url = $event['web_url'];
 
-        $user = $this->em->getRepository(User::class)->findOneByProjectId($error->projectId);
-
-        if (null === $user) {
-            return new Response('User not found', 404);
-        }
-
         $error->owner = $user;
 
         $this->em->persist($error);
@@ -57,7 +49,7 @@ class SentryController extends AbstractController
 
         $devices = $this->em->getRepository(Device::class)
             ->findBy([
-                'owner' => $user
+                'owner' => $user,
             ]);
 
         $notification = new Notification();
@@ -73,7 +65,6 @@ class SentryController extends AbstractController
         }
 
         $this->client->sendNotification($notification);
-
 
         return new Response('OK');
     }

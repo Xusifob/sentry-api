@@ -8,11 +8,10 @@ use App\Security\IEntityVoter;
 
 class SentryExceptionVoter extends IEntityVoter
 {
-    function getSupportedClass(): string
+    public function getSupportedClass(): string
     {
         return SentryException::class;
     }
-
 
     public function canUpdate(SentryException $subject, User $user): bool
     {
@@ -27,8 +26,8 @@ class SentryExceptionVoter extends IEntityVoter
     protected function getSupportedAttributes(): array
     {
         return [
-            BaseVoter::UPDATE => "canUpdate",
-            BaseVoter::DELETE => "canDelete"
+            self::UPDATE => 'canUpdate',
+            self::DELETE => 'canDelete',
         ];
     }
 }

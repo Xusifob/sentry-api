@@ -3,30 +3,22 @@
 namespace App\Security;
 
 use App\Entity\User;
-use App\Security\Voter\BaseVoter;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class UserVoter extends BaseVoter
+class UserVoter extends IEntityVoter
 {
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    public function canUpdate(User $subject, User $user): bool
     {
-        $user = $token->getUser();
-
-        if (!$user instanceof User) {
-            return false;
-        }
-
         return $user->getId() === $subject->getId();
     }
 
-    function getSupportedAttributes(): array
+    public function getSupportedAttributes(): array
     {
-        return [self::UPDATE];
+        return [
+            self::UPDATE => 'canUpdate',
+        ];
     }
 
-    function getSupportedClass(): string|array
+    public function getSupportedClass(): string
     {
         return User::class;
     }

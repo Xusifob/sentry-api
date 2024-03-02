@@ -13,17 +13,12 @@ use App\Doctrine\EntityListener\UserListener;
 use App\Dto\User\Input\SignupInputDto;
 use App\Dto\User\Input\UpdatePasswordDto;
 use App\Dto\User\Output\SignupOutputDto;
-use App\Dto\Video\Input\GenerateIdeaDto;
-use App\Dto\Video\Input\GenerateScriptDto;
-use App\Dto\Video\Output\GenerateIdeaOutputDto;
 use App\Entity\Enum\UserRole;
 use App\Entity\Trait\EntityTrait;
 use App\Repository\UserRepository;
 use App\State\User\MeProvider;
 use App\State\User\SignupProcessor;
 use App\State\User\UpdatePasswordProcessor;
-use App\State\Video\GenerateIdeaProcessor;
-use App\State\Video\GenerateScriptProcessor;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -129,10 +124,6 @@ class User extends Entity implements IEntity, UserInterface, PasswordAuthenticat
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $familyName = null;
 
-    #[Groups(['user:item', 'user:item'])]
-    #[ORM\Column(type: 'simple_array', nullable: true)]
-    public ?array $projects = [];
-
     public function __construct(array $data = [])
     {
         parent::__construct($data);
@@ -157,7 +148,7 @@ class User extends Entity implements IEntity, UserInterface, PasswordAuthenticat
     #[ApiProperty(readable: false, writable: false)]
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
@@ -225,16 +216,6 @@ class User extends Entity implements IEntity, UserInterface, PasswordAuthenticat
         $this->plainPassword = null;
     }
 
-    public function getProjects(): ?array
-    {
-        return $this->projects;
-    }
-
-    public function setProjects(?array $projects): void
-    {
-        $this->projects = $projects;
-    }
-
     public function __toString(): string
     {
         return $this->getFullName();
@@ -250,7 +231,6 @@ class User extends Entity implements IEntity, UserInterface, PasswordAuthenticat
     {
         return $this->isRole(UserRole::ROLE_ADMIN);
     }
-
 
     #[ApiProperty(readable: false, writable: false)]
     public function getUsername(): string

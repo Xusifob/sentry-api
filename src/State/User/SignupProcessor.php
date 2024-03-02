@@ -36,7 +36,7 @@ final class SignupProcessor extends InvitationProcessor
         if (in_array($data->role, UserRole::getSignupAllowedValues())) {
             $user->setRole($data->role);
         } else {
-            $user->setRole(UserRole::ROLE_STUDENT);
+            $user->setRole(UserRole::ROLE_USER);
         }
 
         /** @var User $user */

@@ -1,0 +1,13 @@
+user:
+    email:
+        invalid: "Please enter a valid email address."
+        already_used: "This email address is already used."
+    given_name:
+        invalid: "Please enter a valid given name."
+    family_name:
+        invalid: "Please enter a valid family name."
+    password:
+        invalid: "Please enter a valid password."
+        confirmation: "Please enter a valid password confirmation."
+        not_match: "The password and password confirmation do not match."
+        weak: "The password is too weak."
