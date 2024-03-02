@@ -18,7 +18,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
     operations: [
-        new GetCollection(),
+        new GetCollection(
+            security: "is_granted('ROLE_USER')",
+        ),
         new Patch(
             security: "is_granted('UPDATE',object)",
         ),

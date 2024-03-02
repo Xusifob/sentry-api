@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SentryController extends AbstractController
 {
@@ -22,8 +23,14 @@ class SentryController extends AbstractController
     ) {
     }
 
-    public function webhookAction(Request $request, User $user): Response
+    public function webhookAction(Request $request, string $user): Response
     {
+        $user = $this->em->getRepository(User::class)->find($user);
+
+        if (null === $user) {
+            throw new NotFoundHttpException();
+        }
+
         $data = $request->toArray();
         $event = $data['data']['event'];
 

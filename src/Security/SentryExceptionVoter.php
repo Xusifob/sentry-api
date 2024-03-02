@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Security\Voter;
+namespace App\Security;
 
 use App\Entity\SentryException;
 use App\Entity\User;
-use App\Security\IEntityVoter;
 
 class SentryExceptionVoter extends IEntityVoter
 {
@@ -20,6 +19,9 @@ class SentryExceptionVoter extends IEntityVoter
 
     public function canDelete(SentryException $subject, User $user): bool
     {
+        dump($user);
+        dump($subject);
+
         return $user->getId() === $subject->owner->getId();
     }
 
