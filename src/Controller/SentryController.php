@@ -55,8 +55,8 @@ class SentryController extends AbstractController
         $this->em->persist($error);
         $this->em->flush();
 
-        if($user->slackWebhookUrl) {
-            $this->sendSlackMessage($error,$user);
+        if ($user->slackWebhookUrl) {
+            $this->sendSlackMessage($error, $user);
         }
 
         $devices = $this->em->getRepository(Device::class)
@@ -81,18 +81,14 @@ class SentryController extends AbstractController
         return new Response('OK');
     }
 
-
-    private function sendSlackMessage(SentryException $exception,User $user) : void
+    private function sendSlackMessage(SentryException $exception, User $user): void
     {
-
         $client = HttpClient::create();
 
-        $client->request("POST",$user->slackWebhookUrl,[
-           'json' =>  [
-               'text' => "Erreur Sentry : {$exception->title} (Level {$exception->level}). Please check the following link for more details: {$exception->url}"
-           ]
+        $client->request('POST', $user->slackWebhookUrl, [
+           'json' => [
+               'text' => "Erreur Sentry : {$exception->title} (Level {$exception->level->name}). Please check the following link for more details: {$exception->url}",
+           ],
         ]);
-
     }
-
 }
