@@ -124,6 +124,10 @@ class User extends Entity implements IEntity, UserInterface, PasswordAuthenticat
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $familyName = null;
 
+    #[Groups(['user:item'])]
+    #[ORM\Column(length: 255, nullable: true)]
+    public ?string $slackWebhookUrl = null;
+
     public function __construct(array $data = [])
     {
         parent::__construct($data);

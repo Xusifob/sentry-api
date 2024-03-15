@@ -10,6 +10,7 @@ use App\Entity\SentryException;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -54,6 +55,10 @@ class SentryController extends AbstractController
         $this->em->persist($error);
         $this->em->flush();
 
+        if($user->slackWebhookUrl) {
+            $this->sendSlackMessage($error,$user);
+        }
+
         $devices = $this->em->getRepository(Device::class)
             ->findBy([
                 'owner' => $user,
@@ -75,4 +80,19 @@ class SentryController extends AbstractController
 
         return new Response('OK');
     }
+
+
+    private function sendSlackMessage(SentryException $exception,User $user) : void
+    {
+
+        $client = HttpClient::create();
+
+        $client->request("POST",$user->slackWebhookUrl,[
+           'json' =>  [
+               'text' => "Erreur Sentry : {$exception->title} (Level {$exception->level}). Please check the following link for more details: {$exception->url}"
+           ]
+        ]);
+
+    }
+
 }
